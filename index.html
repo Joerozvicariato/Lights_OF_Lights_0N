@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Environmental Light Pollution Dashboard - School Campus</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h1>🌍 Campus Lighting Dashboard</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active" onclick="showSection('home')">Home</a></li>
+                <li><a href="#areas" class="nav-link" onclick="showSection('areas')">Campus Areas</a></li>
+                <li><a href="#reports" class="nav-link" onclick="showSection('reports')">Reports</a></li>
+                <li><a href="#about" class="nav-link" onclick="showSection('about')">About</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Home Section -->
+            <section id="home" class="section active">
+                <div class="hero">
+                    <h2>Welcome to the Campus Lighting Monitoring System</h2>
+                    <p>Monitor and analyze environmental light pollution across your school campus</p>
+                </div>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <span class="icon">💡</span>
+                        <h3>Real-time Monitoring</h3>
+                        <p>Track lighting conditions in real-time across campus areas</p>
+                    </div>
+                    <div class="info-card">
+                        <span class="icon">🔍</span>
+                        <h3>Safety Analysis</h3>
+                        <p>Identify dark areas and broken lights for student safety</p>
+                    </div>
+                    <div class="info-card">
+                        <span class="icon">📊</span>
+                        <h3>Data Export</h3>
+                        <p>Download lighting data as CSV for reports and documentation</p>
+                    </div>
+                    <div class="info-card">
+                        <span class="icon">🌱</span>
+                        <h3>Environmental Awareness</h3>
+                        <p>Reduce light pollution and energy consumption</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Campus Areas Section -->
+            <section id="areas" class="section">
+                <h2>Campus Areas Lighting Status</h2>
+                
+                <!-- Summary Cards -->
+                <div class="summary-section">
+                    <div class="summary-card proper">
+                        <div class="summary-number" id="properCount">0</div>
+                        <div class="summary-label">Properly Lit Areas</div>
+                    </div>
+                    <div class="summary-card broken">
+                        <div class="summary-number" id="brokenCount">0</div>
+                        <div class="summary-label">Broken/Poor Lighting</div>
+                    </div>
+                    <div class="summary-card nolight">
+                        <div class="summary-number" id="nolightCount">0</div>
+                        <div class="summary-label">No Lighting</div>
+                    </div>
+                    <div class="summary-card total">
+                        <div class="summary-number" id="totalCount">0</div>
+                        <div class="summary-label">Total Areas</div>
+                    </div>
+                </div>
+
+                <!-- Area Cards -->
+                <div class="areas-container" id="areasContainer">
+                    <!-- Area cards will be generated here by JavaScript -->
+                </div>
+
+                <!-- Download Button -->
+                <div class="download-section">
+                    <button class="download-btn" onclick="downloadCSV()">📥 Download CSV Report</button>
+                </div>
+            </section>
+
+            <!-- Reports Section -->
+            <section id="reports" class="section">
+                <h2>Lighting Data Reports</h2>
+                
+                <!-- Filter Options -->
+                <div class="filter-section">
+                    <label for="statusFilter">Filter by Status:</label>
+                    <select id="statusFilter" onchange="filterTable()">
+                        <option value="all">All Areas</option>
+                        <option value="proper">Properly Lit</option>
+                        <option value="broken">Broken/Poor</option>
+                        <option value="nolight">No Lighting</option>
+                    </select>
+                </div>
+
+                <!-- Data Table -->
+                <table class="data-table" id="dataTable">
+                    <thead>
+                        <tr>
+                            <th>Area Name</th>
+                            <th>Lighting Status</th>
+                            <th>Description</th>
+                            <th>Last Updated</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Table rows will be generated here by JavaScript -->
+                    </tbody>
+                </table>
+
+                <!-- Report Statistics -->
+                <div class="report-stats">
+                    <h3>Statistics</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <p class="stat-label">Percentage Properly Lit</p>
+                            <p class="stat-value" id="properPercent">0%</p>
+                        </div>
+                        <div class="stat-item">
+                            <p class="stat-label">Percentage Broken/Poor</p>
+                            <p class="stat-value" id="brokenPercent">0%</p>
+                        </div>
+                        <div class="stat-item">
+                            <p class="stat-label">Percentage No Lighting</p>
+                            <p class="stat-value" id="nolightPercent">0%</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section id="about" class="section">
+                <h2>About This Dashboard</h2>
+                <div class="about-content">
+                    <h3>Project Overview</h3>
+                    <p>
+                        The Environmental Light Pollution Dashboard is designed to help schools monitor and 
+                        manage lighting conditions across their campuses. This system helps identify areas 
+                        that need maintenance, improves student safety, and supports environmental awareness 
+                        by reducing unnecessary light pollution.
+                    </p>
+
+                    <h3>Lighting Status Indicators</h3>
+                    <div class="status-legend">
+                        <div class="legend-item">
+                            <span class="status-indicator proper">●</span>
+                            <span><strong>Green – Properly Lit:</strong> Area has adequate, safe lighting</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="status-indicator broken">●</span>
+                            <span><strong>Red – Broken/Poor Lighting:</strong> Area has insufficient or broken lights</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="status-indicator nolight">●</span>
+                            <span><strong>Gray – No Lighting:</strong> Area has no lighting installed</span>
+                        </div>
+                    </div>
+
+                    <h3>Features</h3>
+                    <ul>
+                        <li>📍 Real-time monitoring of campus lighting conditions</li>
+                        <li>🎯 Color-coded status indicators for quick assessment</li>
+                        <li>📊 Comprehensive reporting with statistics</li>
+                        <li>📥 CSV export for documentation and reporting</li>
+                        <li>🔍 Detailed filtering and search capabilities</li>
+                        <li>🌱 Environmental awareness and energy efficiency</li>
+                    </ul>
+
+                    <h3>Data Collection</h3>
+                    <p>
+                        This dashboard uses simulated data to demonstrate how environmental lighting 
+                        conditions can be monitored and analyzed. In a production environment, this 
+                        system could integrate with IoT sensors for real-time data collection.
+                    </p>
+
+                    <h3>How to Use</h3>
+                    <ol>
+                        <li>Navigate to <strong>Campus Areas</strong> to view current lighting status</li>
+                        <li>Check the <strong>Summary Section</strong> for overall statistics</li>
+                        <li>Visit <strong>Reports</strong> to view detailed data and filter by status</li>
+                        <li>Use the <strong>Download CSV</strong> button to export data for reports</li>
+                    </ol>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2026 School Campus Lighting Monitoring System | Environmental Light Pollution Dashboard</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
